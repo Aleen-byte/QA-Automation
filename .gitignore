@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.env
+
+# ambientes virtuais
+venv/
+.venv/
+env/
+
+# relatórios gerados pelos testes
+report.html
+reports/
+screenshots/
+*.log
+
+# cobertura de código
+.coverage
+htmlcov/
+
+# sistema
+.DS_Store
+Thumbs.db
+
+.claude
