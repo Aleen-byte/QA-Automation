@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 
 
@@ -14,11 +15,12 @@ class InventoryPage(BasePage):
     def add_item_to_cart(self, item_index=0):
         """Adiciona um item ao carrinho pelo índice e aguarda o badge atualizar."""
         current_count = self.get_cart_count()
-        self.driver.execute_script(
-            "document.querySelectorAll('.inventory_item')[arguments[0]]"
-            ".querySelector('button.btn_inventory').click();",
-            item_index
+        locator = (
+            By.XPATH,
+            f"(//div[contains(@class,'inventory_item')])[{item_index + 1}]"
+            f"//button[contains(@class,'btn_inventory')]",
         )
+        self.wait.until(EC.element_to_be_clickable(locator)).click()
         self.wait.until(lambda d: self.get_cart_count() == current_count + 1)
 
     def add_items_to_cart(self, indexes):
