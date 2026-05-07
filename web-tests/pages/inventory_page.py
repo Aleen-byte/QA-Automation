@@ -32,5 +32,7 @@ class InventoryPage(BasePage):
         return int(badges[0].text) if badges else 0
 
     def go_to_cart(self):
-        self.click(self.CART_LINK)
+        self.driver.execute_script(
+            "document.querySelector('.shopping_cart_link').click();"
+        )
         self.wait.until(lambda d: "cart" in d.current_url)
