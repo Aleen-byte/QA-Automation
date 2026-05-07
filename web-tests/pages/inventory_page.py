@@ -14,8 +14,11 @@ class InventoryPage(BasePage):
     def add_item_to_cart(self, item_index=0):
         """Adiciona um item ao carrinho pelo índice e aguarda o badge atualizar."""
         current_count = self.get_cart_count()
-        items = self.driver.find_elements(*self.ITEMS)
-        items[item_index].find_element(By.CSS_SELECTOR, "button.btn_inventory").click()
+        self.driver.execute_script(
+            "document.querySelectorAll('.inventory_item')[arguments[0]]"
+            ".querySelector('button.btn_inventory').click();",
+            item_index
+        )
         self.wait.until(lambda d: self.get_cart_count() == current_count + 1)
 
     def add_items_to_cart(self, indexes):
