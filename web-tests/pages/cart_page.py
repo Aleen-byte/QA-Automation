@@ -12,6 +12,7 @@ class CartPage(BasePage):
         return self.get_text(self.TITLE)
 
     def get_items_count(self):
+        self.find(self.CART_ITEMS)
         return len(self.driver.find_elements(*self.CART_ITEMS))
 
     def proceed_to_checkout(self):
