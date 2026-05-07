@@ -12,14 +12,11 @@ class InventoryPage(BasePage):
         return self.get_text(self.TITLE)
 
     def add_item_to_cart(self, item_index=0):
-        """Adiciona um item ao carrinho pelo índice e aguarda o DOM confirmar."""
+        """Adiciona um item ao carrinho pelo índice e aguarda o badge atualizar."""
+        current_count = self.get_cart_count()
         items = self.driver.find_elements(*self.ITEMS)
-        item = items[item_index]
-        btn = item.find_element(By.CSS_SELECTOR, "button.btn_inventory")
-        btn.click()
-        self.wait.until(
-            lambda d: item.find_element(By.CSS_SELECTOR, "button.btn_inventory").text == "Remove"
-        )
+        items[item_index].find_element(By.CSS_SELECTOR, "button.btn_inventory").click()
+        self.wait.until(lambda d: self.get_cart_count() == current_count + 1)
 
     def add_items_to_cart(self, indexes):
         for i in indexes:
