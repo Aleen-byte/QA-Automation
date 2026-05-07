@@ -34,7 +34,6 @@ jobs:
         working-directory: web-tests
         env:
           CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
-          CHROMEDRIVER_PATH: ${{ steps.setup-chrome.outputs.chromedriver-path }}
         run: pytest
 
       - name: Upload relatório HTML
