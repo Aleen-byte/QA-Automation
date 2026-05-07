@@ -16,3 +16,4 @@ class CartPage(BasePage):
 
     def proceed_to_checkout(self):
         self.click(self.CHECKOUT_BTN)
+        self.wait.until(lambda d: "checkout" in d.current_url)
