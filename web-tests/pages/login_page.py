@@ -17,7 +17,6 @@ class LoginPage(BasePage):
         self.type(self.USERNAME, username)
         self.type(self.PASSWORD, password)
         self.click(self.LOGIN_BTN)
-        self.wait.until(lambda d: d.current_url != URL)
 
     def get_error_message(self):
         return self.get_text(self.ERROR_MSG)
