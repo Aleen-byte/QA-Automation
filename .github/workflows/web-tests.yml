@@ -23,6 +23,7 @@ jobs:
           python-version: "3.11"
 
       - name: Instalar Google Chrome
+        id: setup-chrome
         uses: browser-actions/setup-chrome@v1
 
       - name: Instalar dependências
@@ -31,6 +32,9 @@ jobs:
 
       - name: Executar testes web (headless)
         working-directory: web-tests
+        env:
+          CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
+          CHROMEDRIVER_PATH: ${{ steps.setup-chrome.outputs.chromedriver-path }}
         run: pytest
 
       - name: Upload relatório HTML
