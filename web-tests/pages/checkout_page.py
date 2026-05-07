@@ -17,9 +17,11 @@ class CheckoutPage(BasePage):
         self.type(self.LAST_NAME, last_name)
         self.type(self.POSTAL_CODE, postal_code)
         self.click(self.CONTINUE_BTN)
+        self.wait.until(lambda d: "step-two" in d.current_url)
 
     def finish_order(self):
         self.click(self.FINISH_BTN)
+        self.wait.until(lambda d: "complete" in d.current_url)
 
     def get_complete_header(self):
         return self.get_text(self.COMPLETE_HEADER)
